@@ -66,6 +66,11 @@ class PhpOpenSIPs
   private $dialog = false;
   
   /**
+   * SIP socket
+   */
+  private $sip_socket;
+  
+  /**
    * The opened socket to MI
    */
   private $socket;
@@ -246,6 +251,16 @@ class PhpOpenSIPs
   public function addHeader($header)
   {
     $this->extra_headers[] = $header;
+  }
+  
+  /**
+   * Sets SIP socket
+   * 
+   * @param string $socket
+   */
+  public function setSocket($socket)
+  {
+    $this->sip_socket = $socket;
   }
   
   /**
@@ -806,7 +821,15 @@ class PhpOpenSIPs
     $request[] = $this->method;
     $request[] = $this->uri;
     $request[] = ".";
-    $request[] = ".";
+    
+    if ($this->sip_socket)
+    {
+      $request[] = $this->sip_socket;
+    }
+    else
+    {
+      $request[] = ".";
+    }
     
     $headers = array();
     
