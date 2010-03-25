@@ -378,11 +378,11 @@ class PhpOpenSIPs
     }
     else
     {
-      $url = str_replace("sip:","sip://",$uri);
+      $url = str_replace("sip:","sip://",substr($uri,0,strpos(";")));
       
       if (!$url = @parse_url($url))
       {
-        throw new PhpOpenSIPsException("Failed to parse URI.");
+        throw new PhpOpenSIPsException("Failed to parse URI '$url'.");
       }
       
       $this->host = $url['host'];
