@@ -378,7 +378,9 @@ class PhpOpenSIPs
     }
     else
     {
-      $url = str_replace("sip:","sip://",substr($uri,0,strpos(";")));
+      $uri = ($t_pos = strpos($uri,";")) ? substr($uri,0,$t_pos) : $uri;
+      
+      $url = str_replace("sip:","sip://",$uri);
       
       if (!$url = @parse_url($url))
       {
