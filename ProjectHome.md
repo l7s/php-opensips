@@ -1,0 +1,1 @@
+This is a PHP class which allows for easy interaction with OpenSIPs Management Interface.
